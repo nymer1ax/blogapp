@@ -5,7 +5,7 @@ import co.com.blog.model.post.gateways.PostRepository
 import java.lang.RuntimeException
 
 class GetByIdPostUseCase(private val postRepository: PostRepository){
-    fun getById(post: Post) : Post{
-        return postRepository.findPostById(post.id) ?: throw Exception("Post not found")
+    fun getById(id: Long) : Post{
+        return postRepository.findPostById(id) ?: throw RuntimeException("Post not found")
     }
 }

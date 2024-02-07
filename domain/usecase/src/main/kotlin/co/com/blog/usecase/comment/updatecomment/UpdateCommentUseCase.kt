@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor
 class UpdateCommentUseCase(private val commentRepository: CommentRepository){
 
     fun updateComment(comment: Comment){
+
+        commentRepository.getCommentByID(comment.id)
+                ?: throw RuntimeException("Comment not found")
+
         return commentRepository.updateComment(comment)
     }
 

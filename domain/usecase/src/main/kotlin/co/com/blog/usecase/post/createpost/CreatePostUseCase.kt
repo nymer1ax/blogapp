@@ -2,12 +2,11 @@ package co.com.blog.usecase.post.createpost
 
 import co.com.blog.model.post.Post
 import co.com.blog.model.post.gateways.PostRepository
-import lombok.RequiredArgsConstructor
+import co.com.blog.usecase.category.getcategorybyid.GetCategoryByIdUseCase
 
-@RequiredArgsConstructor
-class CreatePostUseCase(private  val postRepository: PostRepository){
+class CreatePostUseCase(private val postRepository: PostRepository, private val getCategory: GetCategoryByIdUseCase){
     fun createPost(post: Post){
-         postRepository.savePost(post);
+        getCategory.getCategoryById(post.categoriasId)
+        postRepository.savePost(post)
     }
-
 }

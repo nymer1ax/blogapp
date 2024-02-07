@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor
 @RequiredArgsConstructor
 class GetCommentByIDUseCase(private val commentRepository: CommentRepository){
 
-    fun getCommentByID(id: Long): Comment? {
-        return commentRepository.getCommentByID(id)
+    fun getCommentByID(id: Long): Comment {
+        return commentRepository.getCommentByID(id) ?: throw RuntimeException("Comment not found")
     }
 
 }
