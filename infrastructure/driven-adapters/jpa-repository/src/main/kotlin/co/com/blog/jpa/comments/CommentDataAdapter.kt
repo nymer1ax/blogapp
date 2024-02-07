@@ -18,7 +18,7 @@ open class CommentDataAdapter (
 ), CommentRepository {
 
     override fun saveComment(comment: Comment) {
-        val commentData = mapper.map(comment, CommentData::class.java)
+        val commentData = mapToCommentData(comment)
         repository.save(commentData)
     }
 
@@ -29,21 +29,41 @@ open class CommentDataAdapter (
     override fun getAllComments(): List<Comment> {
         val allCommentData = repository.findAll()
         return allCommentData.map { commentData ->
-            mapper.map(commentData, Comment::class.java)
+            mapToComment(commentData)
         }
     }
 
     override fun getCommentByID(id: Long): Comment? {
         val commentData = repository.findById(id)
         return if (commentData.isPresent) {
-            mapper.map(commentData.get(), Comment::class.java)
+            mapToComment(commentData.get())
         } else {
             null
         }
     }
 
     override fun updateComment(comment: Comment) {
-        val commentData = mapper.map(comment, CommentData::class.java)
+        val commentData = mapToCommentData(comment)
         repository.save(commentData)
+    }
+
+    private fun mapToCommentData(comment: Comment): CommentData {
+        return CommentData(
+                id = comment.id,
+                postsId = comment.postsId,
+                contenido = comment.contenido,
+                fechaCreacion = comment.fechaCreacion,
+                fechaActualizacion = comment.fechaActualizacion
+        )
+    }
+
+    private fun mapToComment(commentData: CommentData): Comment {
+        return Comment(
+                id = commentData.id,
+                postsId = commentData.postsId,
+                contenido = commentData.contenido,
+                fechaCreacion = commentData.fechaCreacion,
+                fechaActualizacion = commentData.fechaActualizacion
+        )
     }
 }

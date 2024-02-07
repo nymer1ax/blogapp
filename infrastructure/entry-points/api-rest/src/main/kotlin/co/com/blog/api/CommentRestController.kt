@@ -1,5 +1,6 @@
 package co.com.blog.api
 
+import co.com.blog.api.request.CommentRequest
 import co.com.blog.model.comment.Comment
 import co.com.blog.usecase.comment.createcomment.CreateCommentUseCase
 import co.com.blog.usecase.comment.deletecomment.DeleteCommentUseCase
@@ -19,7 +20,8 @@ class CommentRestController(
         private val updateCommentUseCase: UpdateCommentUseCase
 ) {
     @PostMapping
-    fun createComment(@RequestBody comment: Comment) {
+    fun createComment(@RequestBody comment: CommentRequest) {
+        val comment = comment.toDomain()
         createCommentUseCase.createComment(comment)
     }
 
@@ -39,7 +41,8 @@ class CommentRestController(
     }
 
     @PutMapping("/{id}")
-    fun updateComment(@PathVariable id: Long, @RequestBody comment: Comment) {
-        updateCommentUseCase.updateComment(comment.copy(id = id))
+    fun updateComment(@PathVariable id: Long, @RequestBody commentRequest: CommentRequest) {
+       val comment = commentRequest.toDomain()
+        updateCommentUseCase.updateComment(comment)
     }
 }

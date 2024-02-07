@@ -18,7 +18,12 @@ open class CategoryDataAdapter (
 ), CategoryRepository {
 
     override fun createCategory(category: Category) {
-        val categoryData = mapper.map(category, CategoryData::class.java)
+        val categoryData = CategoryData(
+                id = category.id,
+                nombre = category.nombre,
+                fechaCreacion = category.fechaCreacion,
+                fechaActualizacion = category.fechaActualizacion
+        )
         repository.save(categoryData)
     }
 
@@ -29,21 +34,37 @@ open class CategoryDataAdapter (
     override fun getAllCategories(): List<Category> {
         val allCategoryData = repository.findAll()
         return allCategoryData.map { categoryData ->
-            mapper.map(categoryData, Category::class.java)
+            Category(
+                    id = categoryData.id,
+                    nombre = categoryData.nombre,
+                    fechaCreacion = categoryData.fechaCreacion,
+                    fechaActualizacion = categoryData.fechaActualizacion
+            )
         }
     }
 
     override fun getCategoryById(id: Long): Category? {
         val categoryData = repository.findById(id)
         return if (categoryData.isPresent) {
-            mapper.map(categoryData.get(), Category::class.java)
+            val data = categoryData.get()
+            Category(
+                    id = data.id,
+                    nombre = data.nombre,
+                    fechaCreacion = data.fechaCreacion,
+                    fechaActualizacion = data.fechaActualizacion
+            )
         } else {
             null
         }
     }
 
     override fun updateCategory(category: Category) {
-        val categoryData = mapper.map(category, CategoryData::class.java)
+        val categoryData = CategoryData(
+                id = category.id,
+                nombre = category.nombre,
+                fechaCreacion = category.fechaCreacion,
+                fechaActualizacion = category.fechaActualizacion
+        )
         repository.save(categoryData)
     }
 }

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
-
+import java.util.Date
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,8 +16,8 @@ data class Post(
         val categoriasId: Long,
         val titulo: String,
         val contenido: String,
-        val fechaCreacion: java.time.Instant,
-        val fechaActualizacion: java.time.Instant
+        val fechaCreacion: Date,
+        val fechaActualizacion: Date
 )
 
 

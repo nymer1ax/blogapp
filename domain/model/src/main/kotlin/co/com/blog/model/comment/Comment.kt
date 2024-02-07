@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
+import java.util.*
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ data class Comment(
         val id: Long,
         val postsId: Long,
         val contenido: String,
-        val fechaCreacion: java.time.Instant,
-        val fechaActualizacion: java.time.Instant
+        val fechaCreacion: Date,
+        val fechaActualizacion: Date
 )
 

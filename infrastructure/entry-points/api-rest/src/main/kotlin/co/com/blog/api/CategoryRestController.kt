@@ -1,5 +1,6 @@
 package co.com.blog.api
 
+import co.com.blog.api.request.CategoryRequest
 import co.com.blog.model.category.Category
 import co.com.blog.usecase.category.createcategory.CreateCategoryUseCase
 import co.com.blog.usecase.category.deletecategory.DeleteCategoryUseCase
@@ -22,7 +23,8 @@ class CategoryRestController(
         private val updateCategoryUseCase: UpdateCategoryUseCase
 ) {
     @PostMapping
-    fun createCategory(@RequestBody category: Category) {
+    fun createCategory(@RequestBody categoryRequest: CategoryRequest) {
+        val category = categoryRequest.toDomain()
         createCategoryUseCase.createCategory(category)
     }
 
@@ -42,7 +44,8 @@ class CategoryRestController(
     }
 
     @PutMapping("/{id}")
-    fun updateCategory(@PathVariable id: Long, @RequestBody category: Category) {
-        updateCategoryUseCase.updateCategory(category.copy(id = id))
+    fun updateCategory(@PathVariable id: Long, @RequestBody category: CategoryRequest) {
+        val category = category.toDomain()
+        updateCategoryUseCase.updateCategory(category)
     }
 }

@@ -1,20 +1,17 @@
 package co.com.blog.model.category
+import java.util.Date
 
-import lombok.Builder
-import lombok.AllArgsConstructor
-import lombok.Getter
-import lombok.NoArgsConstructor
-import lombok.Setter
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
 data class Category(
         val id: Long,
         val nombre: String,
-        val fechaCreacion: java.time.Instant,
-        val fechaActualizacion: java.time.Instant
-)
+        val fechaCreacion: Date,
+        val fechaActualizacion: Date
+) {
+    constructor() : this(
+            id = 0L,
+            nombre = "",
+            fechaCreacion = Date(),
+            fechaActualizacion = Date()
+    )
+}
 

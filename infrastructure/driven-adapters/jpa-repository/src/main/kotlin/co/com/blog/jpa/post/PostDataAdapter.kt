@@ -18,14 +18,14 @@ open class PostDataAdapter (
 ), PostRepository {
 
     override fun savePost(post: Post) {
-        val postData = mapper.map(post, PostData::class.java)
+        val postData = mapToPostData(post)
         repository.save(postData)
     }
 
     override fun findPostById(id: Long): Post? {
         val postData = repository.findById(id)
         return if (postData.isPresent) {
-            mapper.map(postData.get(), Post::class.java)
+            mapToPost(postData.get())
         } else {
             null
         }
@@ -38,13 +38,35 @@ open class PostDataAdapter (
     override fun getAllPost(): List<Post> {
         val allPostData = repository.findAll()
         return allPostData.map { postData ->
-            mapper.map(postData, Post::class.java)
+            mapToPost(postData)
         }
     }
 
     override fun updatePost(post: Post): Post? {
-        val postData = mapper.map(post, PostData::class.java)
+        val postData = mapToPostData(post)
         val savedPostData = repository.save(postData)
-        return mapper.map(savedPostData, Post::class.java)
+        return mapToPost(savedPostData)
+    }
+
+    private fun mapToPostData(post: Post): PostData {
+        return PostData(
+                id = post.id,
+                categoriasId = post.categoriasId,
+                titulo = post.titulo,
+                contenido = post.contenido,
+                fechaCreacion = post.fechaCreacion,
+                fechaActualizacion = post.fechaActualizacion
+        )
+    }
+
+    private fun mapToPost(postData: PostData): Post {
+        return Post(
+                id = postData.id,
+                categoriasId = postData.categoriasId,
+                titulo = postData.titulo,
+                contenido = postData.contenido,
+                fechaCreacion = postData.fechaCreacion,
+                fechaActualizacion = postData.fechaActualizacion
+        )
     }
 }
