@@ -1,4 +1,13 @@
 package co.com.blog.usecase.comment.deletecomment
 
-class DeleteCommentUseCase(){
+import co.com.blog.model.comment.gateways.CommentRepository
+import lombok.RequiredArgsConstructor
+
+@RequiredArgsConstructor
+class DeleteCommentUseCase(private val commentRepository: CommentRepository){
+
+    fun deleteComment(id: Long){
+        commentRepository.deleteComment(id)
+    }
+
 }
