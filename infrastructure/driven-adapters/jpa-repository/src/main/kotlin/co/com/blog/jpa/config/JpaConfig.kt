@@ -1,6 +1,5 @@
 package co.com.blog.jpa.config
 
-import co.com.blog.jpa.config.DBSecret
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.springframework.beans.factory.annotation.Value
@@ -11,8 +10,8 @@ import org.springframework.orm.jpa.JpaVendorAdapter
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 
-import jakarta.sql.DataSource
 import java.util.Properties
+import javax.sql.DataSource
 
 @Configuration
 open class JpaConfig {
@@ -42,8 +41,8 @@ open class JpaConfig {
 
     @Bean
     open fun entityManagerFactory(
-        dataSource: DataSource,
-        @Value("\${spring.jpa.databasePlatform}") dialect: String
+            dataSource: DataSource,
+            @Value("\${spring.jpa.databasePlatform}") dialect: String
     ): LocalContainerEntityManagerFactoryBean {
         val em  = LocalContainerEntityManagerFactoryBean()
         em.dataSource = dataSource
