@@ -6,8 +6,8 @@ import co.com.blog.usecase.post.getbyidpost.GetByIdPostUseCase
 import lombok.RequiredArgsConstructor
 
 class DeletePostUseCase(private val postRepository: PostRepository, private val getByIdPostUseCase: GetByIdPostUseCase){
-    fun deletePost(post: Post){
-        val existingPost: Post = getByIdPostUseCase.getById(post.id)
+    fun deletePost(id: Long){
+        val existingPost: Post = getByIdPostUseCase.getById(id)
         postRepository.deletePost(existingPost);
     }
 }
