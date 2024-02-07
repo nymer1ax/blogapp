@@ -12,7 +12,10 @@ import lombok.Setter
 @AllArgsConstructor
 @Builder(toBuilder = true)
 data class Comment(
-  //val anyField : Any?
-) {
-  //fun anyMethod():Any? { return null }
-}
+        val id: Long,
+        val postsId: Long,
+        val contenido: String,
+        val fechaCreacion: java.time.Instant,
+        val fechaActualizacion: java.time.Instant
+)
+

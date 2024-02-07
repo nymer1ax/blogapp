@@ -12,7 +12,9 @@ import lombok.Setter
 @AllArgsConstructor
 @Builder(toBuilder = true)
 data class Category(
-  //val anyField : Any?
-) {
-  //fun anyMethod():Any? { return null }
-}
+        val id: Long,
+        val nombre: String,
+        val fechaCreacion: java.time.Instant,
+        val fechaActualizacion: java.time.Instant
+)
+

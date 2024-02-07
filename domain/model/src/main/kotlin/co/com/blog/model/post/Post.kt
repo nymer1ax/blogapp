@@ -12,6 +12,12 @@ import lombok.Setter
 @AllArgsConstructor
 @Builder(toBuilder = true)
 data class Post(
-        val anyField : Any?
+        val id: Long,
+        val categoriasId: Long,
+        val titulo: String,
+        val contenido: String,
+        val fechaCreacion: java.time.Instant,
+        val fechaActualizacion: java.time.Instant
 )
+
 
